@@ -10,7 +10,8 @@ let initialState = {
             displayName:'Food', 
             description: 'You Can Find All Food You Are Looking For.'
         }
-    ]
+    ],
+    activeCategory:[]
 };
 
  const categoriesReducer = (state = initialState, action) => {
@@ -18,8 +19,7 @@ let initialState = {
     switch (type) {
         case 'ACTIVE':
             let selectedCategory = payload;
-            let categories = state.categories.map(element => {if(element.displayName === payload)
-            return {element}})
+            let categories = state.categories
             return { selectedCategory, categories};
 
         case 'RESET':
@@ -30,10 +30,10 @@ let initialState = {
     }
 };
 // actions
-export const activatedCategory = (displayName) => {
+export const activatedCategory = (category) => {
     return {
         type: 'ACTIVE',
-        payload: displayName,
+        payload: category,
     };
 }
 export const reset = () => {

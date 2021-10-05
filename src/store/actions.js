@@ -1,4 +1,23 @@
 
+const axios = require('axios');
+
+const api = 'https://api-js401.herokuapp.com/api/v1/todo';
+
+export const getData = () => async(dispatch, state)=>{
+    let response = 
+    await axios.get(api);
+    const result = response.data;
+    dispatch(getAll(result))
+}
+
+export const getAll = (data) =>{
+    return {
+        type:'GET',
+        payload:data
+    }
+}
+
+
 export const resetCart = () => {
     return ({
         type: 'REST_CART'

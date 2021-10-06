@@ -1,5 +1,5 @@
 
-const axios = require('axios');
+import axios from "axios";
 
 const api = 'https://api-js401.herokuapp.com/api/v1/todo';
 
@@ -64,3 +64,31 @@ export const addItem = (item) => {
         }
     )
 }
+
+
+export const showDetails = (item)=> (dispatch, state)=>{
+    axios.get(`${api}/${item._id}`).send({
+        name : item.name,
+        category : item.category,
+        url : item.url,
+        price : item.price,
+        availableQuantity : item.availableQuantity
+    })
+    .then(
+        response=>{
+            dispatch(getAction(response.body))
+        }
+    )
+}
+
+export const updateRemoteData = (item) => (dispatch, state)=>{
+    axios.put(`${api}/${item._id}`).send({
+        availableQuantity : item.availableQuantity -1,
+        inCart : item.inCart++,
+    })
+    .then(
+        response=> {
+            dispatch(add(response.body));
+        }
+    )
+};

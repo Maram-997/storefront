@@ -34,9 +34,9 @@ const useStyle = makeStyles((theme) => ({
 const Products = (props) => {
   const classes = useStyle();
   const dispatch = useDispatch()
-  useEffect(()=>{
+  useEffect(() => {
     props.getAll(dispatch(getData()))
-  },[props.products])
+  }, [props.products])
 
 
   return (
@@ -79,6 +79,12 @@ const Products = (props) => {
                   >
                     Add to Cart
                   </Button>
+                  <Link to={`/product/${element._id}`}>
+                    <Button size="small" color="primary"
+                    // onClick={()=> props.showDetails(element._id)}
+                    >View Details
+                    </Button>
+                  </Link>
                 </CardActions>
               </Card>
             </Grid>
